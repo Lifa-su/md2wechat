@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 900px; height: 560px; overflow: hidden; font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0a1628; }
+.chart {
+  width: 900px; height: 560px; padding: 45px 55px;
+  background: linear-gradient(180deg, #0a1628 0%, #0f2040 100%);
+  position: relative;
+}
+.chart-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.chart-subtitle { font-size: 13px; color: rgba(96,165,250,0.45); margin-bottom: 36px; }
+/* Architecture diagram */
+.arch {
+  display: flex; flex-direction: column; align-items: center; gap: 0;
+}
+/* Layer */
+.layer {
+  display: flex; align-items: center; gap: 16px; width: 100%;
+  justify-content: center;
+}
+.layer-label {
+  width: 80px; text-align: right; font-size: 11px;
+  color: rgba(96,165,250,0.4); font-weight: 600;
+  letter-spacing: 1px; flex-shrink: 0;
+}
+.layer-boxes {
+  display: flex; gap: 12px; flex: 1; max-width: 660px;
+}
+.box {
+  flex: 1; padding: 18px 16px; border-radius: 12px;
+  text-align: center; position: relative;
+}
+.box-icon { font-size: 22px; margin-bottom: 8px; }
+.box-title { font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 4px; }
+.box-desc { font-size: 10px; line-height: 1.5; }
+/* Color themes per layer */
+.layer-frontend .box {
+  background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.18);
+}
+.layer-frontend .box-desc { color: rgba(96,165,250,0.45); }
+.layer-api .box {
+  background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.18);
+}
+.layer-api .box-desc { color: rgba(167,139,250,0.45); }
+.layer-ai .box {
+  background: rgba(234,179,8,0.05); border: 1px solid rgba(234,179,8,0.15);
+}
+.layer-ai .box-desc { color: rgba(253,224,71,0.4); }
+.layer-deploy .box {
+  background: rgba(34,197,94,0.05); border: 1px solid rgba(34,197,94,0.15);
+}
+.layer-deploy .box-desc { color: rgba(74,222,128,0.4); }
+/* Arrows between layers */
+.arrow-row {
+  display: flex; justify-content: center; padding: 6px 0;
+}
+.arrow-down {
+  display: flex; flex-direction: column; align-items: center;
+  color: rgba(255,255,255,0.12);
+}
+.arrow-line { width: 1px; height: 10px; background: rgba(255,255,255,0.1); }
+.arrow-head { font-size: 10px; line-height: 1; }
+/* Flow label */
+.flow-label {
+  position: absolute; right: 55px; top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl; text-orientation: mixed;
+  font-size: 10px; color: rgba(255,255,255,0.08);
+  letter-spacing: 4px; font-weight: 600;
+}
+.watermark {
+  position: absolute; bottom: 16px; right: 24px;
+  color: rgba(59,130,246,0.2); font-size: 10px; letter-spacing: 2px;
+}
+</style></head>
+<body>
+<div class="chart">
+  <div class="chart-title">AI 工具箱网站 · 技术架构</div>
+  <div class="chart-subtitle">Next.js + TailwindCSS + DeepSeek API + Vercel 全栈方案</div>
+
+  <div class="arch">
+    <!-- Frontend Layer -->
+    <div class="layer layer-frontend">
+      <div class="layer-label">前端层</div>
+      <div class="layer-boxes">
+        <div class="box">
+          <div class="box-icon">⚛️</div>
+          <div class="box-title">Next.js 14</div>
+          <div class="box-desc">App Router · SSR<br>SEO 友好</div>
+        </div>
+        <div class="box">
+          <div class="box-icon">🎨</div>
+          <div class="box-title">TailwindCSS</div>
+          <div class="box-desc">原子化 CSS<br>响应式布局</div>
+        </div>
+        <div class="box">
+          <div class="box-icon">📱</div>
+          <div class="box-title">React 组件</div>
+          <div class="box-desc">工具卡片 · 输入表单<br>流式输出展示</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-row">
+      <div class="arrow-down"><div class="arrow-line"></div><div class="arrow-head">▼</div><div class="arrow-line"></div></div>
+    </div>
+
+    <!-- API Layer -->
+    <div class="layer layer-api">
+      <div class="layer-label">接口层</div>
+      <div class="layer-boxes">
+        <div class="box">
+          <div class="box-icon">🔌</div>
+          <div class="box-title">API Routes</div>
+          <div class="box-desc">Edge Runtime<br>/api/generate</div>
+        </div>
+        <div class="box">
+          <div class="box-icon">📋</div>
+          <div class="box-title">Prompt 管理</div>
+          <div class="box-desc">5 个工具 Prompt<br>System + User</div>
+        </div>
+        <div class="box">
+          <div class="box-icon">🔄</div>
+          <div class="box-title">流式处理</div>
+          <div class="box-desc">ReadableStream<br>实时文字输出</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-row">
+      <div class="arrow-down"><div class="arrow-line"></div><div class="arrow-head">▼</div><div class="arrow-line"></div></div>
+    </div>
+
+    <!-- AI Layer -->
+    <div class="layer layer-ai">
+      <div class="layer-label">AI 层</div>
+      <div class="layer-boxes">
+        <div class="box">
+          <div class="box-icon">🧠</div>
+          <div class="box-title">DeepSeek-V3</div>
+          <div class="box-desc">OpenAI 兼容 SDK<br>成本仅 GPT-4o 的 1/20</div>
+        </div>
+        <div class="box">
+          <div class="box-icon">💰</div>
+          <div class="box-title">成本控制</div>
+          <div class="box-desc">¥0.28/百万 token<br>缓存命中更低</div>
+        </div>
+        <div class="box">
+          <div class="box-icon">🔀</div>
+          <div class="box-title">模型切换</div>
+          <div class="box-desc">改 baseURL 即可<br>支持多模型备选</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrow-row">
+      <div class="arrow-down"><div class="arrow-line"></div><div class="arrow-head">▼</div><div class="arrow-line"></div></div>
+    </div>
+
+    <!-- Deploy Layer -->
+    <div class="layer layer-deploy">
+      <div class="layer-label">部署层</div>
+      <div class="layer-boxes">
+        <div class="box">
+          <div class="box-icon">▲</div>
+          <div class="box-title">Vercel</div>
+          <div class="box-desc">git push 自动部署<br>免费 SSL · CDN</div>
+        </div>
+        <div class="box">
+          <div class="box-icon">🌐</div>
+          <div class="box-title">Edge Network</div>
+          <div class="box-desc">全球加速<br>100GB 免费带宽</div>
+        </div>
+        <div class="box">
+          <div class="box-icon">📊</div>
+          <div class="box-title">监控 & 分析</div>
+          <div class="box-desc">Vercel Analytics<br>性能监控</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flow-label">数据流向</div>
+  <div class="watermark">AI独立开发日记 · LiFa</div>
+</div>
+</body></html>

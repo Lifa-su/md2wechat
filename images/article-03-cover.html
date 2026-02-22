@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 900px; height: 383px; overflow: hidden; font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+.cover {
+  width: 900px; height: 383px;
+  background: linear-gradient(135deg, #0a1628 0%, #0f2040 30%, #0a1a35 60%, #081525 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.grid {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px);
+  background-size: 45px 45px;
+}
+.orb { position: absolute; border-radius: 50%; filter: blur(70px); }
+.orb1 { width: 300px; height: 300px; background: rgba(59,130,246,0.12); top: -80px; right: 100px; }
+.orb2 { width: 220px; height: 220px; background: rgba(6,182,212,0.08); bottom: -60px; left: 200px; }
+.orb3 { width: 160px; height: 160px; background: rgba(99,102,241,0.08); top: 100px; left: -30px; }
+/* Browser window mockup */
+.browser {
+  position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+  width: 260px; height: 180px; border-radius: 10px;
+  border: 1.5px solid rgba(59,130,246,0.25);
+  background: rgba(15,32,64,0.6); overflow: hidden;
+}
+.browser-bar {
+  height: 28px; background: rgba(59,130,246,0.1);
+  display: flex; align-items: center; padding: 0 10px; gap: 5px;
+  border-bottom: 1px solid rgba(59,130,246,0.15);
+}
+.browser-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+}
+.browser-dot.r { background: rgba(239,68,68,0.5); }
+.browser-dot.y { background: rgba(234,179,8,0.5); }
+.browser-dot.g { background: rgba(34,197,94,0.5); }
+.browser-url {
+  margin-left: 8px; flex: 1; height: 16px; border-radius: 4px;
+  background: rgba(59,130,246,0.08); display: flex; align-items: center;
+  padding: 0 8px; font-size: 8px; color: rgba(147,197,253,0.4);
+}
+.browser-content {
+  padding: 12px; display: flex; flex-direction: column; gap: 8px;
+}
+.browser-line {
+  height: 6px; border-radius: 3px; background: rgba(59,130,246,0.1);
+}
+.browser-line.short { width: 60%; }
+.browser-line.med { width: 80%; }
+.browser-line.long { width: 95%; }
+.browser-block {
+  display: flex; gap: 8px; margin-top: 4px;
+}
+.browser-card {
+  flex: 1; height: 50px; border-radius: 6px;
+  background: rgba(59,130,246,0.06); border: 1px solid rgba(59,130,246,0.1);
+}
+/* Floating tech icons */
+.tech-badge {
+  position: absolute; padding: 5px 12px; border-radius: 8px;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.5px;
+  border: 1px solid; backdrop-filter: blur(4px);
+}
+.tech-badge.nextjs {
+  top: 50px; right: 340px;
+  color: rgba(255,255,255,0.5); border-color: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+}
+.tech-badge.tailwind {
+  bottom: 80px; right: 330px;
+  color: rgba(6,182,212,0.6); border-color: rgba(6,182,212,0.2);
+  background: rgba(6,182,212,0.05);
+}
+.tech-badge.deepseek {
+  top: 120px; right: 350px;
+  color: rgba(99,102,241,0.6); border-color: rgba(99,102,241,0.2);
+  background: rgba(99,102,241,0.05);
+}
+.tech-badge.vercel {
+  bottom: 120px; right: 280px;
+  color: rgba(167,139,250,0.5); border-color: rgba(167,139,250,0.15);
+  background: rgba(167,139,250,0.05);
+}
+/* Content */
+.content {
+  position: relative; z-index: 10; padding-left: 80px; max-width: 480px;
+}
+.tag {
+  display: inline-block; padding: 4px 14px; border-radius: 20px;
+  background: rgba(59,130,246,0.12); border: 1px solid rgba(59,130,246,0.25);
+  color: #60a5fa; font-size: 12px; font-weight: 500;
+  letter-spacing: 1px; margin-bottom: 16px;
+}
+.title {
+  font-size: 30px; font-weight: 800; color: #fff;
+  line-height: 1.35; margin-bottom: 12px;
+  background: linear-gradient(135deg, #fff 0%, #93c5fd 50%, #60a5fa 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.subtitle {
+  font-size: 14px; color: rgba(147,197,253,0.5); line-height: 1.5;
+}
+/* Timer badge */
+.timer {
+  position: absolute; top: 30px; left: 80px;
+  display: flex; align-items: center; gap: 6px;
+  color: rgba(96,165,250,0.4); font-size: 11px; font-weight: 500;
+}
+.timer-icon {
+  width: 18px; height: 18px; border-radius: 50%;
+  border: 1.5px solid rgba(96,165,250,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px;
+}
+.watermark {
+  position: absolute; bottom: 16px; right: 24px;
+  color: rgba(59,130,246,0.3); font-size: 11px;
+  letter-spacing: 2px; font-weight: 500;
+}
+.deco-line {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, #3b82f6, #06b6d4, transparent);
+}
+</style></head>
+<body>
+<div class="cover">
+  <div class="grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  
+  <div class="timer">
+    <div class="timer-icon">⏱</div>
+    48小时 · 零成本
+  </div>
+
+  <div class="browser">
+    <div class="browser-bar">
+      <div class="browser-dot r"></div>
+      <div class="browser-dot y"></div>
+      <div class="browser-dot g"></div>
+      <div class="browser-url">ai-toolbox.vercel.app</div>
+    </div>
+    <div class="browser-content">
+      <div class="browser-line short"></div>
+      <div class="browser-line long"></div>
+      <div class="browser-line med"></div>
+      <div class="browser-block">
+        <div class="browser-card"></div>
+        <div class="browser-card"></div>
+        <div class="browser-card"></div>
+      </div>
+      <div class="browser-line med"></div>
+    </div>
+  </div>
+
+  <div class="tech-badge nextjs">Next.js</div>
+  <div class="tech-badge tailwind">Tailwind</div>
+  <div class="tech-badge deepseek">DeepSeek</div>
+  <div class="tech-badge vercel">Vercel</div>
+
+  <div class="content">
+    <div class="tag">实战教程</div>
+    <div class="title">一个周末<br/>做了一个AI工具网站</div>
+    <div class="subtitle">从想法到上线的完整过程 · 技术选型 · 成本分析</div>
+  </div>
+
+  <div class="watermark">AI独立开发日记</div>
+  <div class="deco-line"></div>
+</div>
+</body></html>

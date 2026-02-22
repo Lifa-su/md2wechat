@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 900px; height: 640px; overflow: hidden; font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0a0e27; }
+.chart {
+  width: 900px; height: 640px; padding: 45px 55px;
+  background: linear-gradient(180deg, #0a0e27 0%, #111338 100%);
+  position: relative;
+}
+.chart-title { font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.chart-subtitle { font-size: 13px; color: rgba(234,179,8,0.45); margin-bottom: 32px; }
+.rows { display: flex; flex-direction: column; gap: 12px; }
+.row {
+  display: flex; align-items: center; gap: 16px; padding: 14px 20px;
+  border-radius: 12px; background: rgba(234,179,8,0.03);
+  border: 1px solid rgba(234,179,8,0.06);
+}
+.row-rank {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(234,179,8,0.1); display: flex;
+  align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: #fbbf24;
+  flex-shrink: 0;
+}
+.row-name {
+  width: 160px; flex-shrink: 0;
+  font-size: 14px; font-weight: 600; color: #e2e8f0;
+}
+.row-bar-wrap {
+  flex: 1; display: flex; align-items: center; gap: 12px;
+}
+.row-bar {
+  flex: 1; height: 24px; border-radius: 6px;
+  background: rgba(255,255,255,0.03); overflow: hidden;
+  position: relative;
+}
+.row-bar-fill {
+  height: 100%; border-radius: 6px;
+  position: relative;
+}
+.row-bar-fill.gold {
+  background: linear-gradient(90deg, rgba(234,179,8,0.3), rgba(245,158,11,0.5));
+}
+.row-bar-fill.silver {
+  background: linear-gradient(90deg, rgba(167,139,250,0.2), rgba(139,92,246,0.4));
+}
+.row-income {
+  font-size: 14px; font-weight: 700; color: #fbbf24;
+  white-space: nowrap; width: 130px; text-align: right; flex-shrink: 0;
+}
+.row-time {
+  font-size: 11px; color: rgba(255,255,255,0.3);
+  white-space: nowrap; width: 80px; text-align: right; flex-shrink: 0;
+}
+/* Legend */
+.legend {
+  margin-top: 24px; display: flex; gap: 24px; justify-content: center;
+}
+.legend-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; color: rgba(255,255,255,0.35);
+}
+.legend-dot {
+  width: 10px; height: 10px; border-radius: 3px;
+}
+.legend-dot.gold { background: rgba(245,158,11,0.5); }
+.legend-dot.silver { background: rgba(139,92,246,0.4); }
+.watermark {
+  position: absolute; bottom: 16px; right: 24px;
+  color: rgba(234,179,8,0.2); font-size: 10px; letter-spacing: 2px;
+}
+</style></head>
+<body>
+<div class="chart">
+  <div class="chart-title">7 条变现路径 · 收入潜力对比</div>
+  <div class="chart-subtitle">基于 Indie Hackers 社区数据 & 真实案例，中等预期月收入</div>
+
+  <div class="rows">
+    <div class="row">
+      <div class="row-rank">1</div>
+      <div class="row-name">AI Micro-SaaS</div>
+      <div class="row-bar-wrap">
+        <div class="row-bar"><div class="row-bar-fill gold" style="width:85%"></div></div>
+      </div>
+      <div class="row-income">¥21,000/月</div>
+      <div class="row-time">3-6个月</div>
+    </div>
+    <div class="row">
+      <div class="row-rank">2</div>
+      <div class="row-name">AI 自动化代理</div>
+      <div class="row-bar-wrap">
+        <div class="row-bar"><div class="row-bar-fill gold" style="width:100%"></div></div>
+      </div>
+      <div class="row-income">¥35,000/月</div>
+      <div class="row-time">1-2个月</div>
+    </div>
+    <div class="row">
+      <div class="row-rank">3</div>
+      <div class="row-name">MCP 插件开发</div>
+      <div class="row-bar-wrap">
+        <div class="row-bar"><div class="row-bar-fill silver" style="width:45%"></div></div>
+      </div>
+      <div class="row-income">¥5,000-30,000</div>
+      <div class="row-time">探索期</div>
+    </div>
+    <div class="row">
+      <div class="row-rank">4</div>
+      <div class="row-name">AI 技术接单</div>
+      <div class="row-bar-wrap">
+        <div class="row-bar"><div class="row-bar-fill gold" style="width:75%"></div></div>
+      </div>
+      <div class="row-income">¥20,000-40,000</div>
+      <div class="row-time">即时</div>
+    </div>
+    <div class="row">
+      <div class="row-rank">5</div>
+      <div class="row-name">浏览器扩展/小工具</div>
+      <div class="row-bar-wrap">
+        <div class="row-bar"><div class="row-bar-fill silver" style="width:40%"></div></div>
+      </div>
+      <div class="row-income">¥13,000/月</div>
+      <div class="row-time">2-4个月</div>
+    </div>
+    <div class="row">
+      <div class="row-rank">6</div>
+      <div class="row-name">AI 知识付费</div>
+      <div class="row-bar-wrap">
+        <div class="row-bar"><div class="row-bar-fill gold" style="width:82%"></div></div>
+      </div>
+      <div class="row-income">¥29,000/月</div>
+      <div class="row-time">2-3个月</div>
+    </div>
+    <div class="row">
+      <div class="row-rank">7</div>
+      <div class="row-name">AI 内容矩阵</div>
+      <div class="row-bar-wrap">
+        <div class="row-bar"><div class="row-bar-fill silver" style="width:50%"></div></div>
+      </div>
+      <div class="row-income">¥5,000-15,000</div>
+      <div class="row-time">3-6个月</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot gold"></div> 已充分验证</div>
+    <div class="legend-item"><div class="legend-dot silver"></div> 早期/探索中</div>
+    <div class="legend-item" style="color:rgba(255,255,255,0.25)">右侧为见效周期</div>
+  </div>
+
+  <div class="watermark">AI独立开发日记 · LiFa</div>
+</div>
+</body></html>

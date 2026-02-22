@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 900px; height: 383px; overflow: hidden; font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+.cover {
+  width: 900px; height: 383px;
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1040 30%, #0d1b3e 60%, #0a0e27 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+/* Grid lines */
+.grid {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(99,102,241,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(99,102,241,0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+/* Floating code blocks */
+.code-block {
+  position: absolute; font-family: 'SF Mono', 'Fira Code', monospace;
+  font-size: 11px; color: rgba(139,92,246,0.3); line-height: 1.6;
+  white-space: pre;
+}
+.code-block.c1 { top: 20px; left: 30px; }
+.code-block.c2 { bottom: 30px; right: 40px; }
+.code-block.c3 { top: 60px; right: 200px; color: rgba(59,130,246,0.2); font-size: 10px; }
+/* Glowing orbs */
+.orb {
+  position: absolute; border-radius: 50%; filter: blur(60px);
+}
+.orb1 { width: 300px; height: 300px; background: rgba(99,102,246,0.15); top: -80px; right: -50px; }
+.orb2 { width: 200px; height: 200px; background: rgba(168,85,247,0.12); bottom: -60px; left: 100px; }
+.orb3 { width: 150px; height: 150px; background: rgba(59,130,246,0.1); top: 50px; left: -30px; }
+/* AI chip icon */
+.ai-icon {
+  position: absolute; right: 100px; top: 50%; transform: translateY(-50%);
+  width: 140px; height: 140px;
+}
+.ai-chip {
+  width: 100px; height: 100px; border: 2px solid rgba(139,92,246,0.4);
+  border-radius: 16px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(139,92,246,0.05);
+  margin: 20px;
+}
+.ai-chip::before, .ai-chip::after {
+  content: ''; position: absolute;
+  background: rgba(139,92,246,0.3);
+}
+.chip-line {
+  position: absolute; background: rgba(139,92,246,0.3);
+}
+.chip-line.top { width: 2px; height: 14px; top: -14px; }
+.chip-line.top.l1 { left: 25px; }
+.chip-line.top.l2 { left: 50px; }
+.chip-line.top.l3 { left: 75px; }
+.chip-line.bottom { width: 2px; height: 14px; bottom: -14px; }
+.chip-line.bottom.l1 { left: 25px; }
+.chip-line.bottom.l2 { left: 50px; }
+.chip-line.bottom.l3 { left: 75px; }
+.chip-line.left { height: 2px; width: 14px; left: -14px; }
+.chip-line.left.l1 { top: 25px; }
+.chip-line.left.l2 { top: 50px; }
+.chip-line.left.l3 { top: 75px; }
+.chip-line.right { height: 2px; width: 14px; right: -14px; }
+.chip-line.right.l1 { top: 25px; }
+.chip-line.right.l2 { top: 50px; }
+.chip-line.right.l3 { top: 75px; }
+.ai-text {
+  color: rgba(139,92,246,0.8); font-size: 28px; font-weight: 700;
+  letter-spacing: 2px;
+}
+/* Content */
+.content {
+  position: relative; z-index: 10; padding-left: 80px; max-width: 560px;
+}
+.tag {
+  display: inline-block; padding: 4px 14px; border-radius: 20px;
+  background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3);
+  color: #a78bfa; font-size: 12px; font-weight: 500;
+  letter-spacing: 1px; margin-bottom: 16px;
+}
+.title {
+  font-size: 32px; font-weight: 800; color: #fff;
+  line-height: 1.35; margin-bottom: 12px;
+  background: linear-gradient(135deg, #fff 0%, #c4b5fd 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.subtitle {
+  font-size: 15px; color: rgba(196,181,253,0.6); line-height: 1.5;
+}
+/* Watermark */
+.watermark {
+  position: absolute; bottom: 16px; right: 24px;
+  color: rgba(139,92,246,0.35); font-size: 11px;
+  letter-spacing: 2px; font-weight: 500;
+}
+/* Decorative line */
+.deco-line {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, #7c3aed, #3b82f6, transparent);
+}
+</style></head>
+<body>
+<div class="cover">
+  <div class="grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  
+  <div class="code-block c1">const ai = new Claude();
+await ai.generate({
+  prompt: userInput,
+  model: "claude-4",
+});</div>
+  
+  <div class="code-block c2">function review(code) {
+  return ai.analyze({
+    source: code,
+    check: ["perf", "security"]
+  });
+}</div>
+
+  <div class="code-block c3">// AI-powered development
+import { Agent } from '@ai/core';
+const dev = Agent.create();</div>
+
+  <div class="ai-icon">
+    <div class="ai-chip">
+      <div class="chip-line top l1"></div>
+      <div class="chip-line top l2"></div>
+      <div class="chip-line top l3"></div>
+      <div class="chip-line bottom l1"></div>
+      <div class="chip-line bottom l2"></div>
+      <div class="chip-line bottom l3"></div>
+      <div class="chip-line left l1"></div>
+      <div class="chip-line left l2"></div>
+      <div class="chip-line left l3"></div>
+      <div class="chip-line right l1"></div>
+      <div class="chip-line right l2"></div>
+      <div class="chip-line right l3"></div>
+      <span class="ai-text">AI</span>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="tag">AI 编程实录</div>
+    <div class="title">我用Claude写了一个月代码<br/>说说真实感受</div>
+    <div class="subtitle">不吹不黑，一个全栈开发者的AI编程体验</div>
+  </div>
+
+  <div class="watermark">AI独立开发日记</div>
+  <div class="deco-line"></div>
+</div>
+</body></html>

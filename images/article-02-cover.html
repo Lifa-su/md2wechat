@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 900px; height: 383px; overflow: hidden; font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; }
+.cover {
+  width: 900px; height: 383px;
+  background: linear-gradient(135deg, #1a0a00 0%, #2d1810 25%, #1a1000 50%, #0d0a00 100%);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.grid {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: 
+    linear-gradient(rgba(234,179,8,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(234,179,8,0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+.orb { position: absolute; border-radius: 50%; filter: blur(70px); }
+.orb1 { width: 350px; height: 350px; background: rgba(234,179,8,0.1); top: -100px; right: 50px; }
+.orb2 { width: 250px; height: 250px; background: rgba(245,158,11,0.08); bottom: -80px; left: 150px; }
+.orb3 { width: 180px; height: 180px; background: rgba(217,119,6,0.06); top: 80px; left: -40px; }
+/* Dollar signs floating */
+.float-symbol {
+  position: absolute; font-size: 60px; font-weight: 800;
+  color: rgba(234,179,8,0.06); font-family: -apple-system, sans-serif;
+}
+.fs1 { top: 30px; right: 80px; font-size: 80px; transform: rotate(12deg); }
+.fs2 { bottom: 40px; left: 60px; font-size: 50px; transform: rotate(-8deg); }
+.fs3 { top: 80px; left: 300px; font-size: 40px; transform: rotate(20deg); color: rgba(234,179,8,0.04); }
+.fs4 { bottom: 80px; right: 200px; font-size: 45px; transform: rotate(-15deg); color: rgba(234,179,8,0.05); }
+/* Rising bars */
+.bars {
+  position: absolute; right: 80px; bottom: 60px; display: flex;
+  align-items: flex-end; gap: 10px;
+}
+.bar {
+  width: 22px; border-radius: 4px 4px 0 0;
+  background: linear-gradient(180deg, rgba(234,179,8,0.5) 0%, rgba(234,179,8,0.1) 100%);
+}
+.bar:nth-child(1) { height: 40px; }
+.bar:nth-child(2) { height: 65px; }
+.bar:nth-child(3) { height: 55px; }
+.bar:nth-child(4) { height: 90px; }
+.bar:nth-child(5) { height: 80px; }
+.bar:nth-child(6) { height: 120px; }
+.bar:nth-child(7) { height: 150px; background: linear-gradient(180deg, rgba(234,179,8,0.7) 0%, rgba(234,179,8,0.2) 100%); }
+/* Trend line */
+.trend-line {
+  position: absolute; right: 70px; bottom: 55px;
+  width: 200px; height: 160px;
+}
+.trend-line svg { width: 100%; height: 100%; }
+/* Content */
+.content {
+  position: relative; z-index: 10; padding-left: 80px; max-width: 520px;
+}
+.tag {
+  display: inline-block; padding: 4px 14px; border-radius: 20px;
+  background: rgba(234,179,8,0.12); border: 1px solid rgba(234,179,8,0.25);
+  color: #fbbf24; font-size: 12px; font-weight: 500;
+  letter-spacing: 1px; margin-bottom: 16px;
+}
+.title {
+  font-size: 30px; font-weight: 800; color: #fff;
+  line-height: 1.35; margin-bottom: 12px;
+  background: linear-gradient(135deg, #fff 0%, #fcd34d 50%, #f59e0b 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.subtitle {
+  font-size: 14px; color: rgba(253,224,71,0.5); line-height: 1.5;
+}
+/* Numbers */
+.big-number {
+  position: absolute; top: 30px; right: 60px;
+  font-size: 72px; font-weight: 900;
+  background: linear-gradient(180deg, rgba(234,179,8,0.15) 0%, rgba(234,179,8,0.03) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  font-family: -apple-system, sans-serif;
+}
+.watermark {
+  position: absolute; bottom: 16px; right: 24px;
+  color: rgba(234,179,8,0.3); font-size: 11px;
+  letter-spacing: 2px; font-weight: 500;
+}
+.deco-line {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, #f59e0b, #eab308, transparent);
+}
+/* Coin icon */
+.coin {
+  position: absolute; right: 300px; top: 40px;
+  width: 50px; height: 50px; border-radius: 50%;
+  border: 3px solid rgba(234,179,8,0.2);
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(234,179,8,0.25); font-size: 24px; font-weight: 800;
+  transform: rotate(-15deg);
+}
+</style></head>
+<body>
+<div class="cover">
+  <div class="grid"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+  
+  <div class="float-symbol fs1">¥</div>
+  <div class="float-symbol fs2">$</div>
+  <div class="float-symbol fs3">₿</div>
+  <div class="float-symbol fs4">¥</div>
+  
+  <div class="big-number">10K+</div>
+  <div class="coin">$</div>
+  
+  <div class="bars">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+
+  <div class="content">
+    <div class="tag">AI 变现指南</div>
+    <div class="title">独立开发者如何用AI<br/>月入过万</div>
+    <div class="subtitle">7个已验证的变现路径 · 真实数据 · 完整拆解</div>
+  </div>
+
+  <div class="watermark">AI独立开发日记</div>
+  <div class="deco-line"></div>
+</div>
+</body></html>

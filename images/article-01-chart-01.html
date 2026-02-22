@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 900px; height: 560px; overflow: hidden; font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #0a0e27; }
+.chart {
+  width: 900px; height: 560px; padding: 50px 60px;
+  background: linear-gradient(180deg, #0a0e27 0%, #111338 100%);
+  position: relative;
+}
+.chart-title {
+  font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px;
+}
+.chart-subtitle {
+  font-size: 13px; color: rgba(167,139,250,0.5); margin-bottom: 40px;
+}
+.comparison {
+  display: flex; gap: 40px; align-items: stretch;
+}
+.col {
+  flex: 1; border-radius: 16px; padding: 30px 28px;
+  position: relative; overflow: hidden;
+}
+.col.before {
+  background: rgba(100,116,139,0.08);
+  border: 1px solid rgba(100,116,139,0.15);
+}
+.col.after {
+  background: rgba(139,92,246,0.06);
+  border: 1px solid rgba(139,92,246,0.2);
+}
+.col-label {
+  font-size: 14px; font-weight: 600; margin-bottom: 24px;
+  display: flex; align-items: center; gap: 8px;
+}
+.col.before .col-label { color: rgba(148,163,184,0.8); }
+.col.after .col-label { color: #a78bfa; }
+.col-label .dot {
+  width: 8px; height: 8px; border-radius: 50%;
+}
+.col.before .dot { background: #64748b; }
+.col.after .dot { background: #8b5cf6; }
+.metric {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.metric:last-child { border-bottom: none; }
+.metric-name {
+  font-size: 13px; color: rgba(255,255,255,0.5);
+}
+.metric-value {
+  font-size: 15px; font-weight: 700;
+}
+.col.before .metric-value { color: rgba(148,163,184,0.7); }
+.col.after .metric-value { color: #c4b5fd; }
+.metric-bar {
+  margin-top: 6px; height: 4px; border-radius: 2px;
+  background: rgba(255,255,255,0.05);
+}
+.metric-bar-fill {
+  height: 100%; border-radius: 2px;
+}
+.col.before .metric-bar-fill { background: rgba(100,116,139,0.4); }
+.col.after .metric-bar-fill { background: linear-gradient(90deg, #7c3aed, #a78bfa); }
+/* Arrow in middle */
+.arrow-col {
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; width: 60px;
+}
+.arrow {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(139,92,246,0.15); border: 1px solid rgba(139,92,246,0.3);
+  display: flex; align-items: center; justify-content: center;
+  color: #a78bfa; font-size: 20px;
+}
+/* Bottom summary */
+.summary {
+  margin-top: 30px; display: flex; gap: 20px; justify-content: center;
+}
+.summary-item {
+  padding: 14px 28px; border-radius: 12px;
+  background: rgba(139,92,246,0.06); border: 1px solid rgba(139,92,246,0.15);
+  text-align: center;
+}
+.summary-number {
+  font-size: 28px; font-weight: 800;
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.summary-label {
+  font-size: 11px; color: rgba(167,139,250,0.5); margin-top: 4px;
+}
+.watermark {
+  position: absolute; bottom: 16px; right: 24px;
+  color: rgba(139,92,246,0.2); font-size: 10px;
+  letter-spacing: 2px;
+}
+</style></head>
+<body>
+<div class="chart">
+  <div class="chart-title">AI 编程效率对比</div>
+  <div class="chart-subtitle">使用 Claude 辅助编程一个月前后的数据变化</div>
+  
+  <div class="comparison">
+    <div class="col before">
+      <div class="col-label"><span class="dot"></span> 使用 AI 之前</div>
+      <div class="metric">
+        <div>
+          <div class="metric-name">日均编码时间</div>
+          <div class="metric-bar" style="width:200px"><div class="metric-bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="metric-value">8-9 小时</div>
+      </div>
+      <div class="metric">
+        <div>
+          <div class="metric-name">代码产出量</div>
+          <div class="metric-bar" style="width:200px"><div class="metric-bar-fill" style="width:40%"></div></div>
+        </div>
+        <div class="metric-value">~200 行/天</div>
+      </div>
+      <div class="metric">
+        <div>
+          <div class="metric-name">学习新技术周期</div>
+          <div class="metric-bar" style="width:200px"><div class="metric-bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="metric-value">3-5 天</div>
+      </div>
+      <div class="metric">
+        <div>
+          <div class="metric-name">写文档时间/周</div>
+          <div class="metric-bar" style="width:200px"><div class="metric-bar-fill" style="width:60%"></div></div>
+        </div>
+        <div class="metric-value">3-4 小时</div>
+      </div>
+      <div class="metric">
+        <div>
+          <div class="metric-name">Debug 平均耗时</div>
+          <div class="metric-bar" style="width:200px"><div class="metric-bar-fill" style="width:70%"></div></div>
+        </div>
+        <div class="metric-value">1-2 小时</div>
+      </div>
+    </div>
+
+    <div class="arrow-col">
+      <div class="arrow">→</div>
+    </div>
+
+    <div class="col after">
+      <div class="col-label"><span class="dot"></span> 使用 AI 之后</div>
+      <div class="metric">
+        <div>
+          <div class="metric-name">日均编码时间</div>
+          <div class="metric-bar" style="width:200px"><div class="metric-bar-fill" style="width:55%"></div></div>
+        </div>
+        <div class="metric-value">4-5 小时</div>
+      </div>
+      <div class="metric">
+        <div>
+          <div class="metric-name">代码产出量</div>
+          <div class="metric-bar" style="width:200px"><div class="metric-bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="metric-value">~500 行/天</div>
+      </div>
+      <div class="metric">
+        <div>
+          <div class="metric-name">学习新技术周期</div>
+          <div class="metric-bar" style="width:200px"><div class="metric-bar-fill" style="width:35%"></div></div>
+        </div>
+        <div class="metric-value">1-2 天</div>
+      </div>
+      <div class="metric">
+        <div>
+          <div class="metric-name">写文档时间/周</div>
+          <div class="metric-bar" style="width:200px"><div class="metric-bar-fill" style="width:25%"></div></div>
+        </div>
+        <div class="metric-value">0.5-1 小时</div>
+      </div>
+      <div class="metric">
+        <div>
+          <div class="metric-name">Debug 平均耗时</div>
+          <div class="metric-bar" style="width:200px"><div class="metric-bar-fill" style="width:30%"></div></div>
+        </div>
+        <div class="metric-value">15-30 分钟</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <div class="summary-item">
+      <div class="summary-number">2-3x</div>
+      <div class="summary-label">代码产出提升</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-number">60%</div>
+      <div class="summary-label">AI 生成代码占比</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-number">$20</div>
+      <div class="summary-label">月费用 (Claude Pro)</div>
+    </div>
+    <div class="summary-item">
+      <div class="summary-number">2-3h</div>
+      <div class="summary-label">每天节省时间</div>
+    </div>
+  </div>
+
+  <div class="watermark">AI独立开发日记 · LiFa</div>
+</div>
+</body></html>
