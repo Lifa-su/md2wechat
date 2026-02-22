@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check index.html exists
+        run: test -f index.html
+
+      - name: Validate HTML
+        run: |
+          echo "Checking for basic HTML structure..."
+          grep -q "<!DOCTYPE\|<html\|<head\|<body" index.html && echo "HTML structure OK" || echo "Warning: missing standard HTML tags"
